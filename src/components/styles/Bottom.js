@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 
 export const Bottom = styled.div`
-  flex-grow: 0;
   display: flex;
   justify-content: center;
   color: white;
-  z-index: 800;
-`
-
+  position: relative;
+  padding-bottom: 16px;
+`;
 export const BottomLink = styled.div`
   margin: 0 20px;
   padding: 10px 0;
@@ -24,4 +23,4 @@ export const BottomLink = styled.div`
     color: white;
     filter: drop-shadow(${props => props.theme.ts});
   }
-`
+`;

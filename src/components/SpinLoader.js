@@ -34,7 +34,6 @@ const dash = keyframes`
 
 const Spinner = styled.svg`
   animation: ${rotate} 2s linear infinite;
-  z-index: 2;
   position: absolute;
   top: 50%;
   left: 50%;

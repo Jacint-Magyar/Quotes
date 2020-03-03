@@ -1,46 +1,52 @@
-import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
-import Nav from 'components/Nav';
-import Quotes from 'pages/Quotes';
-import Videos from 'pages/Videos';
+import React from 'react';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import styled from 'styled-components';
+import { DailyQuote, Library, AddNew, EditQuote, EditList } from 'pages';
 
-class App extends Component {
-  state = {
-    token: null
-  }
+const App = () => {
 
-  handleSetToken = (token) => {
-    this.setState({ token })
-  }
-
-  render() {
-    return (
-      <>
-        <Router style={{ minHeight: '100vh' }}>
-          <Nav setToken={this.handleSetToken} />
-          {/* <Route path="/bookmarks">
-            <Videos />
-          </Route> */}
-          <Switch>
-            <Route path="/">
-              <Quotes />
-            </Route>
-            <Route path="/videos">
-              <Videos token={this.state.token} />
-            </Route>
-            {/* <Route exact path="/">
-              <Redirect to="/quotes" />
-            </Route> */}
-          </Switch>
-        </Router>
-      </>
-    );
-  }
+  return (
+    <BrowserRouter style={{ minHeight: '100vh' }}>
+      <Wrapper>
+        <Overlay />
+        <Switch>
+          <Route exact path='/'>
+            <DailyQuote />
+          </Route>
+          <Route path='/library'>
+            <Library />
+          </Route>
+          <Route path='/new'>
+            <AddNew />
+          </Route>
+          <Route path='/edit-quote'>
+            <EditQuote />
+          </Route>
+          <Route path='/edit-list'>
+            <EditList />
+          </Route>
+        </Switch>
+      </Wrapper>
+    </BrowserRouter>
+  );
 }
 
 export default App;
+
+const Wrapper = styled.div`
+  height: 100vh;
+  overflow: hidden;
+  background: url("https://source.unsplash.com/collection/827743/1600x900");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+`;
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+`;

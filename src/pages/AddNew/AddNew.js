@@ -10,14 +10,14 @@ const AddNew = () => {
   return (
     <Wrapper>
 
-      <SubMenu>
+      <Links>
         <NavLink to={`${match.url}/quote`} activeClassName="active">
           Quote
         </NavLink>
         <NavLink to={`${match.url}/list`} activeClassName="active">
           List
         </NavLink>
-      </SubMenu>
+      </Links>
 
       <Switch>
         <Route path={`${match.url}/quote`}>
@@ -37,20 +37,19 @@ export default AddNew;
 
 
 const Wrapper = styled.div`
-  position: relative;
-  z-index: 900;
-  padding: 0 40px;
-  padding-top: 96px;
-  margin: 0 auto;
-  width: ${props => props.theme.maxWidth};
   height: 100%;
+  max-width: ${props => props.theme.maxWidth};
+  margin: 0 auto;
+  padding: 32px 16px 0;
+  position: relative;
 `;
 
-const SubMenu = styled.div`
+const Links = styled.div`
   margin-bottom: 24px;
+  text-align: center;
 
   a {
-    font-size: 20px;
+    font-size: 24px;
     line-height: 30px;
     margin-right: 40px;
     cursor: pointer;

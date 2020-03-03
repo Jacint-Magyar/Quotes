@@ -10,6 +10,7 @@ const theme = {
   offWhite: '#EDEDED',
   maxWidth: '960px',
   bs: '0px 2px 8px rgba(0, 0, 0, 0.9)',
+  bsLight: '0px 1px 4px rgba(0, 0, 0, 0.2)',
   ts: '0px 1px 4px rgba(0, 0, 0, 0.7)',
   bgLight: 'rgba(255, 255, 255, 0.6)',
   bgLighter: 'rgba(255, 255, 255, 0.8)',
@@ -39,6 +40,12 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
     color: ${theme.black};
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+  p {
+    margin: 0;
   }
   .highlighted-text {
     background-color: #999999;

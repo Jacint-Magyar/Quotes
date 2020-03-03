@@ -19,9 +19,11 @@ connection.once('open', () => {
 });
 
 const quotesRouter = require('./routes/quotes');
+const listsRouter = require('./routes/lists');
 // const usersRouter = require('./routes/users');
 
 app.use('/quotes', quotesRouter);
+app.use('/lists', listsRouter);
 // app.use('/users', usersRouter);
 
 app.listen(port, () => {

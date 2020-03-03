@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-const Buttons = ({ onSave }) => {
+const Buttons = ({ onCancel, onSave }) => {
   const history = useHistory();
 
   return (
     <Wrapper>
-      <Button1 onClick={() => history.push("/quotes/all")}>
+      <Button1 onClick={() => history.push(onCancel)}>
         Cancel
       </Button1>
       <Button2 onClick={() => onSave()}>
@@ -22,6 +22,7 @@ export default Buttons;
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  position: relative;
 
   button {
     width: 156px;
