@@ -2,12 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-const Buttons = ({ onCancel, onSave }) => {
+interface Props {
+  cancelPath: string;
+  onSave: () => void;
+}
+
+const Buttons: React.FC<Props> = ({ cancelPath, onSave }) => {
   const history = useHistory();
 
   return (
     <Wrapper>
-      <Button1 onClick={() => history.push(onCancel)}>
+      <Button1 onClick={() => history.push(cancelPath)}>
         Cancel
       </Button1>
       <Button2 onClick={() => onSave()}>

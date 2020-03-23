@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import Buttons from 'components/Buttons';
-import { IconRemove } from 'components/Icons';
+import { IconAdd, IconRemove } from 'components/Icons';
 
-const EditList = () => {
-  const location = useLocation();
+const List = () => {
+  const [title, setTitle] = useState('');
+  const [items, setItems] = useState<string[]>([]);
   const history = useHistory();
 
-  const [title, setTitle] = useState(location.state.list.title);
-  const [items, setItems] = useState(location.state.list.items);
-
-  const itemHandler = ({ target: { name, value } }) => {
+  const itemHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     const index = +name.slice(5) - 1;
 
     setItems(currentItems => {
@@ -24,7 +23,7 @@ const EditList = () => {
     });
   };
 
-  const removeItem = (index) => {
+  const removeItem = (index: number) => {
     setItems(currentItems => {
       return currentItems.filter((item, i) => i !== index);
     });
@@ -39,11 +38,14 @@ const EditList = () => {
   }
 
   const saveList = () => {
-    const id = location.state.list._id;
+    const list = {
+      title,
+      items: Object.values(items)
+    }
 
-    axios.post(`http://localhost:5000/lists/update/${id}`, { title, items })
+    axios.post('http://localhost:5000/lists/new', { ...list })
       .then(res => console.log(res.data))
-      .catch(err => console.log(err));
+      .then(err => console.log(err));
 
     history.push({ pathname: '/library', state: { updated: true } });
   };
@@ -55,7 +57,6 @@ const EditList = () => {
           type="text"
           name="title"
           placeholder="Title"
-          value={title}
           onChange={e => setTitle(e.target.value)}
         />
         <ListItems>
@@ -71,19 +72,22 @@ const EditList = () => {
               <IconRemove onClick={() => removeItem(i)} />
             </ListItem>
           )}
-          <AddItem onClick={addItem}>+ Add item</AddItem>
+          <AddItem onClick={addItem}>
+            <IconAdd />
+            Add item
+          </AddItem>
         </ListItems>
       </Wrapper>
-      <Buttons onCancel='/library' onSave={saveList} />
+      <Buttons cancelPath='/' onSave={saveList} />
     </>
   );
 };
 
-export default EditList;
+export default List;
 
 const Wrapper = styled.div`
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 32px;
   color: #404040;
   backdrop-filter: blur(4px);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
@@ -92,7 +96,7 @@ const Wrapper = styled.div`
 
   input[name="title"] {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.8);
     outline: none;
     padding: 20px 32px;
     border: none;
@@ -144,6 +148,7 @@ const ListItem = styled.div`
     width: 34px;
     height: 34px;
     padding: 8px;
+    margin-right: 16px;
     cursor: pointer;
     opacity: 0;
 
@@ -153,16 +158,27 @@ const ListItem = styled.div`
   }
 `;
 const AddItem = styled.div`
-  font-size: 15px;
+  font-size: 16px;
   line-height: 47px;
   font-weight: 600;
   padding: 0 32px;
   margin-top: -1px;
-  color: #666666;
+  color: #595959;
   cursor: pointer;
   border-top: 1px solid rgba(255, 255, 255, 0.5);
 
   &:hover {
-    color: #333333;
+    color: #262626;
+
+    svg {
+      fill: #262626;
+    }
+  }
+
+  svg {
+    width: 16px;
+    margin-right: 8px;
+    position: relative;
+    top: 1px;
   }
 `;

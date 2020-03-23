@@ -4,7 +4,7 @@ import App from './App';
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
 const theme = {
-  black: '#393939',
+  black: '#333333',
   grey: '#3A3A3A',
   lightgrey: '#E1E1E1',
   offWhite: '#EDEDED',

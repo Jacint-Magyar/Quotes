@@ -1,36 +1,41 @@
 import React, { useRef } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import Buttons from 'components/Buttons';
+import { Quote, Dispatch } from 'types';
 
-const EditQuote = () => {
-  const quoteRef = useRef();
-  const location = useLocation();
+interface Props {
+  quote: Quote;
+  dispatch: Dispatch;
+}
+
+const EditQuote: React.FC<Props> = ({ quote, dispatch }) => {
+  const quoteRef = useRef(null);
   const history = useHistory();
 
   const saveQuote = () => {
-    const id = location.state.quote._id;
     const text = quoteRef.current.value;
 
-    axios.post(`http://localhost:5000/quotes/update/${id}`, { text })
+    axios.post(`http://localhost:5000/quotes/update/${quote._id}`, { text })
       .then(res => console.log(res))
       .catch(err => console.log(err));
 
-    history.push({ pathname: '/library', state: { updated: true } });
+    dispatch({ type: 'UPDATE_QUOTES', payload: [] });
+    history.push('/library', { updated: true, tab: 'quotes' });
   }
+
   return (
     <Wrapper>
       <Title>
         <h2>Edit quote</h2>
       </Title>
-
       <TextArea
-        defaultValue={location.state.quote.text}
+        defaultValue={quote.text}
         ref={quoteRef}
         placeholder="Write your quote here..."
       />
-      <Buttons onCancel='/library' onSave={saveQuote} />
+      <Buttons cancelPath='/library' onSave={saveQuote} />
     </Wrapper>
   );
 };

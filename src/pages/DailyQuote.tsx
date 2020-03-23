@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import SpinLoader from 'components/SpinLoader';
 import { Bottom, BottomLink } from 'components/styles/Bottom';
 
-const DailyQuote = () => {
+const DailyQuote: React.FC = () => {
   const [quote, setQuote] = useState({ text: '', isLast: false });
   const [index, setIndex] = useState(0);
 
@@ -60,8 +60,8 @@ const DailyQuote = () => {
         </Bottom>
       </BottomWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
 export default DailyQuote;
 
@@ -74,7 +74,7 @@ const Wrapper = styled.div`
   position: relative;
 `;
 const Quote = styled.div`
-  font-size: 3vh;
+  font-size: 3.5vh;
   color: white;
   text-shadow: ${props => props.theme.bs};
   width: 100%;

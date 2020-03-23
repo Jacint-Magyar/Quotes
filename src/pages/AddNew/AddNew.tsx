@@ -9,7 +9,6 @@ const AddNew = () => {
 
   return (
     <Wrapper>
-
       <Links>
         <NavLink to={`${match.url}/quote`} activeClassName="active">
           Quote
@@ -28,13 +27,11 @@ const AddNew = () => {
         </Route>
         <Redirect exact from={match.url} to={`${match.url}/quote`} />
       </Switch>
-
     </Wrapper>
   )
 };
 
 export default AddNew;
-
 
 const Wrapper = styled.div`
   height: 100%;

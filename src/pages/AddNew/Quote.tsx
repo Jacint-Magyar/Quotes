@@ -5,7 +5,7 @@ import axios from 'axios';
 import Buttons from 'components/Buttons';
 
 const Quote = () => {
-  const quoteRef = useRef();
+  const quoteRef = useRef(null);
   const history = useHistory();
 
   const saveQuote = () => {
@@ -19,7 +19,7 @@ const Quote = () => {
   return (
     <>
       <TextArea ref={quoteRef} placeholder="Write your quote here..." />
-      <Buttons onCancel='/' onSave={saveQuote} />
+      <Buttons cancelPath='/' onSave={saveQuote} />
     </>
   );
 };

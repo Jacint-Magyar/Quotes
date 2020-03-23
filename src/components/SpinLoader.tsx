@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { keyframes } from 'styled-components';
 
-function SpinLoader(props) {
+function SpinLoader(props: {}) {
   return (
     <Spinner viewBox="0 0 50 50" {...props}>
       <circle cx={25} cy={25} r={20} fill="none" strokeWidth="4" />

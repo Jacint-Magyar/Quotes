@@ -31,7 +31,7 @@ router.route('/update/:id').post((req, res) => {
       list.items = req.body.items;
 
       list.save()
-        .then(() => res.json('Quote updated'))
+        .then(() => res.json('List updated'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
